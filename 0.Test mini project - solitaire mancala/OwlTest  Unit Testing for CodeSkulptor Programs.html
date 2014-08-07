@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)http://codeskulptor.appspot.com/owltest/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="shortcut icon" href="http://codeskulptor.appspot.com/include/favicon.ico">
+<link rel="stylesheet" type="text/css" href="./OwlTest  Unit Testing for CodeSkulptor Programs_files/codemirror.css">
+<link rel="stylesheet" type="text/css" href="./OwlTest  Unit Testing for CodeSkulptor Programs_files/jquery-ui-1.10.3.custom.min.css">
+<link rel="stylesheet" type="text/css" href="./OwlTest  Unit Testing for CodeSkulptor Programs_files/codeskulptor2.css">
+<!--
+<link rel="stylesheet" type="text/css" href="/include/codeskulptor2.css" />
+-->
+<script type="text/javascript" src="./OwlTest  Unit Testing for CodeSkulptor Programs_files/codemirror-compressed.js"></script>
+<!-- <script type="text/javascript" -->
+<!-- 	src="http://www.codeskulptor.org/js/runmode.js"></script> -->
+<script type="text/javascript" src="./OwlTest  Unit Testing for CodeSkulptor Programs_files/runmode_line_nums.js"></script>
+<script type="text/javascript" src="./OwlTest  Unit Testing for CodeSkulptor Programs_files/jquery.min.js"></script>
+<script type="text/javascript" src="./OwlTest  Unit Testing for CodeSkulptor Programs_files/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./OwlTest  Unit Testing for CodeSkulptor Programs_files/owltest.js"></script>
+
+<!-- <script type="text/javascript" src="http://www.codeskulptor.org/codeskulptor2.js"></script> -->
+
+
+<!-- <script type="text/javascript" src="/media/codeskulptor2.js"></script> -->
+
+<link rel="stylesheet" type="text/css" href="./OwlTest  Unit Testing for CodeSkulptor Programs_files/owltest.css">
+
+
+
+
+
+
+
+<title>OwlTest: Unit Testing for CodeSkulptor Programs</title>
+
+<script type="text/javascript" src="./OwlTest  Unit Testing for CodeSkulptor Programs_files/jsapi"></script>
+
+<script type="text/javascript">
+//	$(function() { // function to run at page load
+		//$("#tabs").hide(); // hide the tabs until there is content to show
+		
+		        // Resize editor/console when window is resized
+//         window.onresize = function (evt) {
+//             var h = $(window).height();
+//             resizeHeight(h);
+//         };
+        
+        // Window sizing
+
+/*         
+		// Get minimum and extra height from original positions 
+        this.minheight = this.console.height();
+        // How do I figure out how much space should be below?
+        abovespace = this.console.offset().top;
+        belowspace = $("#bottom").height() * 3;
+        extraheight = abovespace + belowspace;
+*/
+
+//	});
+
+
+/*
+    // Adjust editor/console height
+    //
+    //  view    - view object
+    //  height  - height of the editor/console
+    var resizeHeight = function (height) {
+        // Adjust for topbar and maintain minimum size
+        height = height - view.extraheight;
+        if (height < view.minheight) {
+            height = view.minheight;
+        };
+
+        // Resize editor
+        view.editor.setSize(null, height);
+
+
+
+        // Resize console
+        view.console.height(height);
+
+        view.editor.refresh();
+    }; 
+ */
+    var tabManager = new OwlTest.TabManager("tabs", "http://www.codeskulptor.org/#user34_XlHaPCOTZd_18.py");
+    
+	var channel_token = "AHRlWrod5GUoz3ARDv4ok_mhnb9AeeJfhQyFwsbU1DfJ8Ya9zlVevQzAj4U1_ExKxT9-0II9ORh9STNp4q7LNXFji-W-jFeduJah3deno68aN-FgGmqcK6SK8pmb3DX_eGmLi6YkLNPV";
+
+	var socket;
+
+	function onOpened() {
+		$("#status").html("Waiting for results...  (May take up to "+165+" secs.   Resubmit if timeout occurs.)");
+		console.log("Socket_Handler.onOpened() called.");
+
+	}
+
+	function onMessage(msg_obj) {
+		var msg_obj = JSON.parse(msg_obj.data);
+
+		/* 
+		msg_obj = {
+			'score': score, 
+			'max_score': max score,
+			'student_filename': student filename,
+			'student_code': student code body
+			'tabs': {
+				'tab_id': {
+					'label': tab label,
+					'msg_dicts': [{'pts':XX, 'msg':"..."]   // pts field may be missing if no points associated with message.
+				}
+			}
+			'error_msg': error msg string
+		}
+		 */
+
+		if (null != msg_obj.error_msg) {
+			$("#status").html(
+					"<em><b>Error: " + msg_obj.error_msg + "</b></em>");
+		}
+
+		if (null != msg_obj.tabs) {
+			tabManager.makeTabs(msg_obj);
+			tabManager.showTabs(0);
+		}
+
+		socket.close();
+		console
+				.log("Socket_Handler.onMessage(): message received and processed.  Socket closed.");
+
+	}
+
+	function onError(err_obj) {
+		$("#error_msg")
+				.html(
+						"<b><p> Socket Error: HTML status = " + err_obj.code
+								+ "  Description = " + err_obj.description
+								+ "</p></b>");
+		console.log("Socket_Handler.onError(): " + err_obj.description);
+	}
+
+	function onClose() {
+		console.log("Socket_Handler.onClose() called.");
+	}
+	
+	
+
+	function validate_form(form) {
+		if (! validatePythonFilename(getElt("student_file"), "Upload Local Python File")) {
+		 	return false;
+		 }
+		form.date_time.value = (new Date()).toJSON();
+		return true;
+	}
+	
+</script>
+<style>
+.ui-tabs .ui-tabs-nav
+{
+background: CornSilk ;
+}
+</style>
+<style>#wcs-iframe { display: none; }</style></head>
+<body style="background-color: rgb(255, 248, 220);">
+
+	<div class="top-bar-centered">
+		<div class="float-left title">OwlTest</div>
+		<a href="http://www.codeskulptor.org/" target="_blank"> <img id="brand" src="./OwlTest  Unit Testing for CodeSkulptor Programs_files/codeskulptor.png" alt="CodeSkulptor">
+		</a> 
+		<div class="top-bar-centered-end"></div>
+	</div>
+
+	<div style="padding: .5em;">
+		<div style="font-weight:bold; color:red">
+		 		
+		
+		<span id="error_msg"></span></div>
+
+		<div class="centeredblock">
+			<fieldset style="border: 1px solid darkblue">
+				<legend style="color: darkblue; font-weight: bold;">Submit
+					your code for testing</legend>
+				<p>Provide either</p>
+
+				<form method="post" action="./OwlTest  Unit Testing for CodeSkulptor Programs_files/OwlTest  Unit Testing for CodeSkulptor Programs.html" enctype="multipart/form-data" onsubmit="return validate_form(this);">
+					<table>
+						<tbody><tr>
+							<th><label for="id_urlStudent">A CodeSkulptor URL:</label></th>
+							<td><input id="student_URL" type="text" name="student_URL" size="65" value="http://www.codeskulptor.org/#user34_XlHaPCOTZd_18.py"></td>
+						</tr>
+						<tr>
+							<th><label for="id_upFileStudent">or upload a local
+									Python file:</label></th>
+							<td><span><input type="file" size="52" name="student_file" id="student_file" onchange="validatePythonFilename(this, &#39;Upload Local Python File&#39;);"></span></td>
+						</tr>
+						<tr>
+							<th><label> </label></th>
+							<td><p></p></td>
+						</tr>
+						<tr>
+							<th><label for="id_desc">Unit tests to be run:</label></th>
+							<td><h3>Solitaire Mancala grading page</h3> 
+<p>
+Machine tests for the <code>SolitaireMancala</code> class. This class should support the following methods:
+</p><ul>  
+<li> <code>__init__(self)</code>: Create a <code>SolitaireMancala</code> object whose configuration consists of a board with an empty store and no houses (i.e; the configuration <code>[0]</code>).
+</li><li> <code>set_board(self, configuration)</code>: Set the board to be a copy of the supplied configuration (to avoiding referencing issues).   The configuration will be a list of integers in the form described above.
+</li><li> <code>__str__(self)</code>: Return a string corresponding to the current configuration of the Mancala board. This string is formatted as a list with the store appearing in the rightmost (last) entry. Consecutive entries should be separated by a comma and blank (as done by Python when converting a list to a string).
+</li><li> <code>get_num_seeds(self, house_num)</code>:  Return the number of seeds in the house with index <code>house_num</code>.  Note that house <code>0</code> corresponds to the store.
+</li><li> <code>is_legal_move(self, house_num)</code>: Return <code>True</code> if moving the seeds from house <code>house_num</code> is legal.  Otherwise, return <code>False</code>. If <code>house_num</code> is zero, <code>is_legal_move</code> should return <code>False</code>.
+</li><li> <code>apply_move(self, house_num)</code>:  Apply a legal move for house <code>house_num</code> to the board.
+</li><li> <code>choose_move(self)</code>: Return the index for the legal move whose house is closest to the store.  If no legal move is available, return <code>0</code>. 
+</li><li> <code>is_game_won(self)</code>:  Return <code>True</code> if all houses contain no seeds. Return <code>False</code> otherwise.
+</li><li> <code>plan_moves(self)</code>: Given a Mancala game, return a list of legal moves computed to win the game if possible.  In computing this sequence, the method repeatedly chooses the move whose house is closest to the store when given a choice of legal moves.  Note that this method should <b>not</b> update the current configuration of the game.
+</li></ul>
+<p>
+A series of automatic tests will be run for each method.  Also, note Pylint will be used to test that your code conforms to the class coding style
+guidelines.</p> 
+<p>Total score: 100 pts</p></td>
+						</tr>
+					</tbody></table>
+					 
+					<input type="hidden" name="urlTests" value="poc.poc_mancala_machine.py" id="id_urlTests"> 
+					<input type="hidden" name="desc" value="&lt;h3&gt;Solitaire Mancala grading page&lt;/h3&gt; 
+&lt;p&gt;
+Machine tests for the &lt;code&gt;SolitaireMancala&lt;/code&gt; class. This class should support the following methods:
+&lt;/p&gt;&lt;ul&gt;  
+&lt;li&gt; &lt;code&gt;__init__(self)&lt;/code&gt;: Create a &lt;code&gt;SolitaireMancala&lt;/code&gt; object whose configuration consists of a board with an empty store and no houses (i.e; the configuration &lt;code&gt;[0]&lt;/code&gt;).
+&lt;/li&gt;&lt;li&gt; &lt;code&gt;set_board(self, configuration)&lt;/code&gt;: Set the board to be a copy of the supplied configuration (to avoiding referencing issues).   The configuration will be a list of integers in the form described above.
+&lt;/li&gt;&lt;li&gt; &lt;code&gt;__str__(self)&lt;/code&gt;: Return a string corresponding to the current configuration of the Mancala board. This string is formatted as a list with the store appearing in the rightmost (last) entry. Consecutive entries should be separated by a comma and blank (as done by Python when converting a list to a string).
+&lt;/li&gt;&lt;li&gt; &lt;code&gt;get_num_seeds(self, house_num)&lt;/code&gt;:  Return the number of seeds in the house with index &lt;code&gt;house_num&lt;/code&gt;.  Note that house &lt;code&gt;0&lt;/code&gt; corresponds to the store.
+&lt;/li&gt;&lt;li&gt; &lt;code&gt;is_legal_move(self, house_num)&lt;/code&gt;: Return &lt;code&gt;True&lt;/code&gt; if moving the seeds from house &lt;code&gt;house_num&lt;/code&gt; is legal.  Otherwise, return &lt;code&gt;False&lt;/code&gt;. If &lt;code&gt;house_num&lt;/code&gt; is zero, &lt;code&gt;is_legal_move&lt;/code&gt; should return &lt;code&gt;False&lt;/code&gt;.
+&lt;/li&gt;&lt;li&gt; &lt;code&gt;apply_move(self, house_num)&lt;/code&gt;:  Apply a legal move for house &lt;code&gt;house_num&lt;/code&gt; to the board.
+&lt;/li&gt;&lt;li&gt; &lt;code&gt;choose_move(self)&lt;/code&gt;: Return the index for the legal move whose house is closest to the store.  If no legal move is available, return &lt;code&gt;0&lt;/code&gt;. 
+&lt;/li&gt;&lt;li&gt; &lt;code&gt;is_game_won(self)&lt;/code&gt;:  Return &lt;code&gt;True&lt;/code&gt; if all houses contain no seeds. Return &lt;code&gt;False&lt;/code&gt; otherwise.
+&lt;/li&gt;&lt;li&gt; &lt;code&gt;plan_moves(self)&lt;/code&gt;: Given a Mancala game, return a list of legal moves computed to win the game if possible.  In computing this sequence, the method repeatedly chooses the move whose house is closest to the store when given a choice of legal moves.  Note that this method should &lt;b&gt;not&lt;/b&gt; update the current configuration of the game.
+&lt;/li&gt;&lt;/ul&gt;
+&lt;p&gt;
+A series of automatic tests will be run for each method.  Also, note Pylint will be used to test that your code conforms to the class coding style
+guidelines.&lt;/P&gt; 
+&lt;p&gt;Total score: 100 pts&lt;/p&gt;" id="id_desc"> 
+					<input type="hidden" name="urlPylintConfig" value="poc.pylint_config.py" id="id_urlPylintConfig"> 
+					<input type="hidden" name="imports" value="" id="id_imports"> 
+					<input type="hidden" name="date_time">
+					<input type="submit" value="Submit to OwlTest">
+				</form>
+			</fieldset>
+		</div>
+		<div>
+			<fieldset>
+				<legend style="font-weight: bold;">Results</legend>
+				<p id="status"><b>Score:</b>&nbsp;100.0/100&nbsp;<b><em>Perfect score!</em> All tests pass. Great job!</b></p>
+				<div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+					<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist"><li class="ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" tabindex="0" aria-controls="tabs-student-code" aria-labelledby="ui-id-1" aria-selected="true"><a href="http://codeskulptor.appspot.com/owltest/#tabs-student-code" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">Your code</a> </li></ul>
+					<!-- Need to start with an empty list of tabs -->
+				<div id="tabs-student-code" aria-labelledby="ui-id-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="true" aria-hidden="false" style="display: block;"><div><p>Filename: <a target="_blank" href="http://www.codeskulptor.org/#user34_XlHaPCOTZd_18.py">user34_XlHaPCOTZd_18.py</a></p><code><pre class="code" id="tabs-student-code-text"><div class="CodeMirror cm-s-default"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 37px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; padding: 0px; width: 1000px; height: 1em; outline: none; font-size: 4px;"></textarea></div><div class="CodeMirror-hscrollbar" style="left: 33px; min-height: 18px;"><div style="height: 1px;"></div></div><div class="CodeMirror-vscrollbar" style="display: block; bottom: 0px; min-width: 18px;"><div style="width: 1px; height: 1399px;"></div></div><div class="CodeMirror-scrollbar-filler"></div><div class="CodeMirror-gutter-filler"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="min-width: 629px; margin-left: 33px; min-height: 1399px;"><div style="position: relative; top: 962px;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"><div style="width: 50px; height: 50px; overflow-x: scroll;"></div></div><div style="position: relative; z-index: 1; display: none;"></div><div class="CodeMirror-code" style=""><div style="position: relative; display: none;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">66</div></div><pre>    <span class="cm-keyword">def</span> <span class="cm-variable">choose_move</span>(<span class="cm-variable">self</span>):</pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">75</div></div><pre>        <span class="cm-string">"""Return True if all houses contain no seeds.</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">76</div></div><pre><span class="cm-string">        Return False otherwise."""</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">77</div></div><pre>        <span class="cm-variable">count</span> = <span class="cm-number">0</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">78</div></div><pre>        <span class="cm-keyword">for</span> <span class="cm-variable">idx</span> <span class="cm-operator">in</span> <span class="cm-builtin">range</span>(<span class="cm-builtin">len</span>(<span class="cm-variable">self</span>.<span class="cm-variable">_board</span>)<span class="cm-operator">-</span><span class="cm-number">1</span>, <span class="cm-number">0</span>, <span class="cm-operator">-</span><span class="cm-number">1</span>):</pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">79</div></div><pre>            <span class="cm-variable">count</span> += <span class="cm-variable">self</span>.<span class="cm-variable">_board</span>[<span class="cm-variable">idx</span>]</pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">80</div></div><pre>            </pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">81</div></div><pre>        <span class="cm-keyword">if</span> <span class="cm-variable">count</span> <span class="cm-operator">==</span> <span class="cm-number">0</span>:</pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">82</div></div><pre>            <span class="cm-keyword">return</span> <span class="cm-builtin">True</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">83</div></div><pre>        <span class="cm-keyword">else</span>:</pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">84</div></div><pre>            <span class="cm-keyword">return</span> <span class="cm-builtin">False</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">85</div></div><pre>        </pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">86</div></div><pre>    <span class="cm-keyword">def</span> <span class="cm-variable">plan_moves</span>(<span class="cm-variable">self</span>):</pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">87</div></div><pre>        <span class="cm-string">"""Given a Mancala game, return a list of legal moves</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">88</div></div><pre><span class="cm-string">        computed to win the game if possible. In computing this</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">89</div></div><pre><span class="cm-string">        sequence, the method repeatedly chooses the move whose</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">90</div></div><pre><span class="cm-string">        house is closest to the store when given a choice of</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">91</div></div><pre><span class="cm-string">        legal moves."""</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">92</div></div><pre>        <span class="cm-variable">legal_moves</span> = []</pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">93</div></div><pre>        <span class="cm-variable">game</span> = <span class="cm-variable">SolitaireMancala</span>()</pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">94</div></div><pre>        <span class="cm-variable">game</span>.<span class="cm-variable">set_board</span>(<span class="cm-builtin">list</span>(<span class="cm-variable">self</span>.<span class="cm-variable">_board</span>))</pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">95</div></div><pre>        <span class="cm-variable">next_move</span> = <span class="cm-variable">game</span>.<span class="cm-variable">choose_move</span>()</pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">96</div></div><pre>        <span class="cm-keyword">while</span> (<span class="cm-variable">next_move</span> <span class="cm-operator">!=</span> <span class="cm-number">0</span>):</pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">97</div></div><pre>            <span class="cm-variable">game</span>.<span class="cm-variable">apply_move</span>(<span class="cm-variable">next_move</span>)</pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">98</div></div><pre>            <span class="cm-variable">legal_moves</span>.<span class="cm-variable">append</span>(<span class="cm-variable">next_move</span>)</pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">99</div></div><pre>            <span class="cm-variable">next_move</span> = <span class="cm-variable">game</span>.<span class="cm-variable">choose_move</span>()</pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">100</div></div><pre>        <span class="cm-keyword">return</span> <span class="cm-variable">legal_moves</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">101</div></div><pre>  </pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">102</div></div><pre><span class="cm-comment">#import test suite and run</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">103</div></div><pre><span class="cm-comment">#import poc_mancala_testsuite</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">104</div></div><pre><span class="cm-comment">#poc_mancala_testsuite.run_test(SolitaireMancala)</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">105</div></div><pre>&nbsp;</pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">106</div></div><pre><span class="cm-comment">#import poc_mancala_gui</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 24px;">107</div></div><pre><span class="cm-comment">#poc_mancala_gui.run_gui(SolitaireMancala())</span></pre></div></div><div class="CodeMirror-cursor" style="left: 4px; top: -962px; height: 13px;">&nbsp;</div><div class="CodeMirror-cursor CodeMirror-secondarycursor" style="display: none;">&nbsp;</div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px; top: 1399px;"></div><div class="CodeMirror-gutters" style="height: 1399px; left: 0px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 32px;"></div></div></div></div></pre></code></div></div></div>
+			</fieldset>
+		</div>
+	</div>
+
+	<div style="font-family: Verdana, Geneva, sans-serif; text-align: center; font-size: 10px;">
+		The CodeSkulptor Unit Tester was built by <a href="http://www.bandgap.cs.rice.edu/personal/adrice_swong/public/default.aspx" target="_blank"> Stephen Wong</a>.
+	</div>
+
+	<script type="text/javascript">
+		// GAE Channels Javascript docs say that this code should be here at the end of the <body> tag.
+
+		if (channel_token != "") {
+
+			var channel = new goog.appengine.Channel(channel_token);
+			socket = channel.open({
+				'onopen' : onOpened,
+				'onmessage' : onMessage,
+				'onerror' : onError,
+				'onclose' : onClose
+			});
+		}
+	</script>
+
+</body></html>

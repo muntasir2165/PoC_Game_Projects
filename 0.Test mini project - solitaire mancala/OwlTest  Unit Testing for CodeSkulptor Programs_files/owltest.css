@@ -1,0 +1,58 @@
+div.centeredblock {
+    margin-left: auto;
+    margin-right: auto;
+    width: 55em;
+}
+
+div.centeredblock_large {
+    margin-left: auto;
+    margin-right: auto;
+    width: 75em;
+}
+
+
+
+.top-bar-centered {
+	text-align:center;
+	color: white;
+	margin: 0;
+	padding: 0;
+	/* Generated at http://gradients.glrzad.com/ */
+	background: linear-gradient(left top, rgb(0,34,146) 11%, rgb(0,36,126) 56%, rgb(0,35,106) 78%);
+	background: -o-linear-gradient(left top, rgb(0,34,146) 11%, rgb(0,36,126) 56%, rgb(0,35,106) 78%);
+	background: -moz-linear-gradient(left top, rgb(0,34,146) 11%, rgb(0,36,126) 56%, rgb(0,35,106) 78%);
+	background: -webkit-linear-gradient(left top, rgb(0,34,146) 11%, rgb(0,36,126) 56%, rgb(0,35,106) 78%);
+	background: -ms-linear-gradient(left top, rgb(0,34,146) 11%, rgb(0,36,126) 56%, rgb(0,35,106) 78%);
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(0.11, rgb(0,34,146)), color-stop(0.56, rgb(0,36,126)), color-stop(0.78, rgb(0,35,106)));
+}
+
+.top-bar-centered img {
+	display:inline-block; 
+ 	padding-top: 4px;  
+/* 	padding-right: 4px; */
+/* 	vertical-align:middle; */
+}
+.top-bar-centered-end {
+	clear: both;
+}
+.top-bar-centered .float-left {
+	float: left;
+	margin-left: 5px;
+	text-align: left;
+}
+
+.top-bar-centered .title {
+	font-size:200%;
+	font-weight: bold;
+	margin-top: 4px;
+}
+
+.top-bar-centered .float-right {
+	float: right;
+	margin-right: 5px;
+	text-align: right;
+}
+
+.top-bar-centered .signin {
+	margin-top: 5px;
+}

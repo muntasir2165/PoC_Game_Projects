@@ -1,0 +1,110 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs28 \cf0 Project template\
+{\field{\*\fldinst{HYPERLINK "http://www.codeskulptor.org/#poc_tttmm_template.py"}}{\fldrslt http://www.codeskulptor.org/#poc_tttmm_template.py}}\
+\
+mm_move() implementation\
+base case implementation\
+{\field{\*\fldinst{HYPERLINK "http://www.codeskulptor.org/#user37_i8FT5Mw0Yl_0.py"}}{\fldrslt http://www.codeskulptor.org/#user37_i8FT5Mw0Yl_0.py}}\
+{\field{\*\fldinst{HYPERLINK "http://www.codeskulptor.org/#user37_i8FT5Mw0Yl_1.py"}}{\fldrslt http://www.codeskulptor.org/#user37_i8FT5Mw0Yl_1.py}}\
+recursion implementation: (OwlTest score 26/100)\
+{\field{\*\fldinst{HYPERLINK "http://www.codeskulptor.org/#user37_i8FT5Mw0Yl_3.py"}}{\fldrslt http://www.codeskulptor.org/#user37_i8FT5Mw0Yl_3.py}}\
+(OwlTest score 45/100)\
+{\field{\*\fldinst{HYPERLINK "http://www.codeskulptor.org/#user37_i8FT5Mw0Yl_4.py"}}{\fldrslt http://www.codeskulptor.org/#user37_i8FT5Mw0Yl_4.py}}\
+(OwlTest score 45/100)\
+{\field{\*\fldinst{HYPERLINK "http://www.codeskulptor.org/#user37_i8FT5Mw0Yl_5.py"}}{\fldrslt http://www.codeskulptor.org/#user37_i8FT5Mw0Yl_5.py}}\
+(OwlTest score 61/100)\
+{\field{\*\fldinst{HYPERLINK "http://www.codeskulptor.org/#user37_i8FT5Mw0Yl_7.py"}}{\fldrslt http://www.codeskulptor.org/#user37_i8FT5Mw0Yl_6.py}}\
+(OwlTest score 63/100)\
+{\field{\*\fldinst{HYPERLINK "http://www.codeskulptor.org/#user37_i8FT5Mw0Yl_8.py"}}{\fldrslt http://www.codeskulptor.org/#user37_i8FT5Mw0Yl_8.py}}\
+{\field{\*\fldinst{HYPERLINK "http://www.codeskulptor.org/#user37_i8FT5Mw0Yl_10.py"}}{\fldrslt http://www.codeskulptor.org/#user37_i8FT5Mw0Yl_10.py}}\
+(OwlTest score 63/100)\
+{\field{\*\fldinst{HYPERLINK "http://codeskulptor.appspot.com/owltest/"}}{\fldrslt http://codeskulptor.appspot.com/owltest/}}\
+(OwlTest score 88/100)\
+{\field{\*\fldinst{HYPERLINK "http://www.codeskulptor.org/#user37_i8FT5Mw0Yl_13.py"}}{\fldrslt http://www.codeskulptor.org/#user37_i8FT5Mw0Yl_13.py}}\
+\
+A different kind of implementation\
+{\field{\*\fldinst{HYPERLINK "http://www.codeskulptor.org/#user37_rsDJLehJ5Y_1.py"}}{\fldrslt http://www.codeskulptor.org/#user37_rsDJLehJ5Y_1.py}}\
+Added the line: score_move_list.sort()\
+{\field{\*\fldinst{HYPERLINK "http://www.codeskulptor.org/#user37_rsDJLehJ5Y_2.py"}}{\fldrslt http://www.codeskulptor.org/#user37_rsDJLehJ5Y_2.py}}\
+\
+Working version!\
+{\field{\*\fldinst{HYPERLINK "http://www.codeskulptor.org/#user37_rsDJLehJ5Y_2.py"}}{\fldrslt http://www.codeskulptor.org/#user37_rsDJLehJ5Y_2.py}}\
+\
+Final version\
+{\field{\*\fldinst{HYPERLINK "http://www.codeskulptor.org/#user37_rsDJLehJ5Y_4.py"}}{\fldrslt http://www.codeskulptor.org/#user37_rsDJLehJ5Y_4.py}}\
+=================================================================\
+"""\
+Mini-max Tic-Tac-Toe Player\
+"""\
+\
+import poc_ttt_gui\
+import poc_ttt_provided as provided\
+\
+# Set timeout, as mini-max can take a long time\
+import codeskulptor\
+codeskulptor.set_timeout(60)\
+\
+# SCORING VALUES - DO NOT MODIFY\
+SCORES = \{provided.PLAYERX: 1,\
+          provided.DRAW: 0,\
+          provided.PLAYERO: -1\}\
+\
+def mm_move(board, player):\
+    """\
+    Make a move on the board.\
+    \
+    Returns a tuple with two elements.  The first element is the score\
+    of the given board and the second element is the desired move as a\
+    tuple, (row, col).\
+    """\
+    #completed board case\
+    no_more_moves = board.check_win()\
+    if (no_more_moves != None):\
+        return SCORES[no_more_moves], (-1, -1) \
+    else:\
+        score_move_list = []\
+        empty_squares = board.get_empty_squares()\
+        for next_move in empty_squares:\
+            board_copy = board.clone()\
+            board_copy.move(next_move[0], next_move[1], player)\
+            #case where the game ends after the above move\
+            is_game_over = board_copy.check_win()\
+            if (is_game_over != None):\
+                return SCORES[is_game_over], next_move\
+            else:\
+                next_player = provided.switch_player(player)\
+                score= mm_move(board_copy, next_player)[0]\
+                score_move_list.append((score, next_move))\
+        #sort the list for scoring purposes\
+        score_move_list.sort()\
+        if player == provided.PLAYERX:\
+            best_score = score_move_list[-1][0]\
+            best_move = score_move_list[-1][1]\
+        if player == provided.PLAYERO:\
+            best_score = score_move_list[0][0]\
+            best_move = score_move_list[0][1]\
+        return best_score, best_move\
+                \
+\
+def move_wrapper(board, player, trials):\
+    """\
+    Wrapper to allow the use of the same infrastructure that was used\
+    for Monte Carlo Tic-Tac-Toe.\
+    """\
+    move = mm_move(board, player)\
+    assert move[1] != (-1, -1), "returned illegal move (-1, -1)"\
+    return move[1]\
+\
+# Test game with the console or the GUI.\
+# Uncomment whichever you prefer.\
+# Both should be commented out when you submit for\
+# testing to save time.\
+\
+#provided.play_game(move_wrapper, 1, False)        \
+#poc_ttt_gui.run_gui(3, provided.PLAYERO, move_wrapper, 1, False)\
+}

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<!-- saved from url=(0065)https://class.coursera.org/principlescomputing-001/wiki/dice_game -->
+<html xmlns:fb="http://ogp.me/ns/fb#" itemtype="http://schema.org" class="supports-svg"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=IE7"><meta name="fragment" content="!"><meta name="robots" content="NOODP"><meta charset="utf-8"><meta property="og:title" content="Coursera"><meta property="og:type" content="website"><meta property="og:image" content="http://s3.amazonaws.com/coursera/media/Coursera_Computer_Narrow.png"><meta property="og:url" content="https://www.coursera.org/wiki/dice_game"><meta property="og:site_name" content="Coursera"><meta property="og:locale" content="en_US"><meta property="og:description" content="Take free online classes from 80+ top universities and organizations. Coursera is a social entrepreneurship company partnering with Stanford University, Yale University, Princeton University and others around the world to offer courses online for anyone to take, for free. We believe in connecting people to a great education so that anyone around the world can learn without limits."><meta property="fb:admins" content="727836538,4807654"><meta property="fb:app_id" content="274998519252278"><meta name="description" content="Take free online classes from 80+ top universities and organizations. Coursera is a social entrepreneurship company partnering with Stanford University, Yale University, Princeton University and others around the world to offer courses online for anyone to take, for free. We believe in connecting people to a great education so that anyone around the world can learn without limits."><meta name="image" content="http://s3.amazonaws.com/coursera/media/Coursera_Computer_Narrow.png"><meta name="apple-itunes-app" content="app-id=736535961"><title>Wiki - Analyzing a Simple Dice Game | Coursera</title>    <link href="./Wiki - Analyzing a Simple Dice Game   Coursera_files/spark.main.css" rel="stylesheet" type="text/css">
+      <link href="./Wiki - Analyzing a Simple Dice Game   Coursera_files/course.css" rel="stylesheet" type="text/css">
+    <link href="https://spark-public.s3.amazonaws.com/principlescomputing/static/images/favicon.ico" rel="icon">
+<script type="text/javascript" async="" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/ga.js"></script><script type="text/javascript" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/MathJax.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="pages/spark/routes" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/routes.js"></script><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Hover_Arrow {position: absolute; width: 15px; height: 11px; cursor: pointer}
+</style><style type="text/css">.MathJax_Display {text-align: center; margin: 1em 0em; position: relative; display: block; width: 100%}
+.MathJax .merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+#MathJax_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true'); padding: 3px 4px; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; border: 0; padding: 0; margin: 0}
+.MathJax img, .MathJax nobr, .MathJax a {border: 0; padding: 0; margin: 0; max-width: none; max-height: none; vertical-align: 0; line-height: normal; text-decoration: none}
+img.MathJax_strut {border: 0 !important; padding: 0 !important; margin: 0 !important; vertical-align: 0 !important}
+.MathJax span {display: inline; position: static; border: 0; padding: 0; margin: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+.MathJax nobr {white-space: nowrap ! important}
+.MathJax img {display: inline ! important; float: none ! important}
+.MathJax_Processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden}
+.MathJax_Processed {display: none!important}
+.MathJax_ExBox {display: block; overflow: hidden; width: 1px; height: 60ex}
+.MathJax .MathJax_EmBox {display: block; overflow: hidden; width: 1px; height: 60em}
+.MathJax .MathJax_HitBox {cursor: text; background: white; opacity: 0; filter: alpha(opacity=0)}
+.MathJax .MathJax_HitBox * {filter: none; opacity: 1; background: transparent}
+#MathJax_Tooltip * {filter: none; opacity: 1; background: transparent}
+@font-face {font-family: MathJax_Blank; src: url('about:blank')}
+</style><script type="text/javascript" charset="utf-8" async="" data-requirecontext="204js" data-requiremodule="_204" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/204.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="pages/spark/views/template/student-page" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/student-page.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="pages/spark/views/template/student-page.html" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/student-page.html.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="pages/spark/views/template/nls/student-page" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/student-page(1).js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="pages/spark/views/template/header" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/header.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="pages/spark/views/template/sidebar" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/sidebar.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/lib/readme" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/readme.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="pages/spark/views/template/header.html" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/header.html.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="pages/spark-survey/assessApi" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/assessApi.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="pages/spark/views/template/sidebar.html" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/sidebar.html.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="spark/app/signature/js/signature_track" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/signature_track.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="bundles/assess/assessmentTypes/sparkSurveyQuestions/sparkSurveyQuestionsSessionModel" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/sparkSurveyQuestionsSessionModel.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="pages/spark/views/template/nls/header" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/header(1).js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="pages/spark/views/template/nls/sidebar" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/sidebar(1).js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="spark/app/signature/js/signatureTrackLastChanceModal.html" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/signatureTrackLastChanceModal.html.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="spark/app/signature/js/flexjoinLastChanceModal.html" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/flexjoinLastChanceModal.html.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/lib/util" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/util.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="bundles/assess/assessmentTypes/quickQuestions/sessionModel" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/sessionModel.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="bundles/assess/assessmentTypes/SessionModel" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/sessionModel(1).js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="bundles/assess/framework/QuestionCollection" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/QuestionCollection.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="bundles/assess/framework/QuestionModel" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/QuestionModel.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="bundles/assess/lib/backbone.hascollections" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/backbone.hascollections.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="js/lib/underscore.extend" src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/underscore.extend.js"></script><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuTitle {background-color: #CCCCCC; margin: -5px 0 0 0; text-align: center; font-style: italic; font-size: 80%; color: #444444; padding: 2px 0; overflow: hidden}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_Menu_Close {position: absolute; width: 31px; height: 31px; top: -15px; left: -15px}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style></head><body><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0px; height: 1px; width: auto; padding: 0px; border: 0px; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_Hidden"></div></div><div id="MathJax_Message" style="display: none;"></div><div id="fb-root"></div><div id="spark-help" class="hide"></div><a href="http://help.coursera.org/customer/widget/emails/new" target="_blank"><div style="z-index: 1" data-networkprioritysupportwidget="" role="button" class="helpwidget-tab hide">Premium Support</div></a><div id="origami"><div><div><div class="coursera-page"><div role="menubar" class="coursera-header"><div class="hidden">This page features MathJax technology to render mathematical formulae.
+If you are using a screen reader, please visit <a href="http://www.dessci.com/en/products/mathplayer/">MathPlayer</a> to download the plugin for your browser. Please note that this is an Internet Explorer-only plugin at this time.</div><h1 class="hidden">Principles of Computing</h1><!-- UNTIL dashboard announcement expires 2014-08-31 (then delete this code)--><div role="banner" class="course-topbar container-fluid"><div class="row-fluid"><div class="span3"><a href="https://www.coursera.org/" data-if-linkable="add-referrer" class="course-topbar-logo"></a></div><div style="float:right;" class="course-topbar-nav-container span9"><h2 class="hidden">Top Navigation Bar</h2><ul class="course-topbar-nav-list"><li class="course-topbar-nav-list-item"><a href="https://www.coursera.org/courses" data-if-linkable="add-referrer">Courses</a></li><li tabindex="0" role="button" aria-haspopup="true" aria-expanded="false" aria-owns="course-topbar-my" data-popup="#course-topbar-my" data-popup-bind-open="mouseenter" data-popup-close="data-popup-close" style="cursor:pointer;" data-popup-direction="se" class="course-topbar-nav-list-item"><a data-user-id="39836">Mohammad Muntasir Biojid Sirajee<i class="icon-caret-down"></i></a></li></ul></div></div><div id="course-topbar-aboutus" class="course-topbar-sublist"><a href="https://www.coursera.org//about/" target="_new" data-if-linkable="add-referrer" class="internal-about course-topbar-sublist-item">About Us</a><a href="https://www.coursera.org//about/careers" target="_new" data-if-linkable="add-referrer" class="internal-about course-topbar-sublist-item">Careers</a><a href="https://www.coursera.org//about/people" target="_new" data-if-linkable="add-referrer" class="internal-about course-topbar-sublist-item">People</a><a href="https://www.coursera.org//about/contact" target="_new" data-if-linkable="add-referrer" class="internal-about course-topbar-sublist-item">Contact Us</a></div><div id="course-topbar-my" class="course-topbar-sublist"><a data-popup-close="data-popup-close" href="https://www.coursera.org/" target="_new" class="course-topbar-sublist-item">My Courses</a><a data-popup-close="data-popup-close" href="https://www.coursera.org/account/profile" target="_new" class="course-topbar-sublist-item">Profile</a><a data-popup-close="data-popup-close" href="https://www.coursera.org/account/records" target="_new" class="course-topbar-sublist-item">Course Records</a><a href="https://www.coursera.org/account/settings" target="_new" class="course-topbar-sublist-item">Settings</a><a href="https://class.coursera.org/principlescomputing-001/class/preferences" class="course-topbar-sublist-item">Course Preferences</a><a href="https://class.coursera.org/principlescomputing-001/auth/logout" class="course-topbar-sublist-item">Sign Out</a></div></div><div class="course-topbanner-wrapper"><div class="course-topbanner"><div class="course-topbanner-university-logo"><a href="https://www.coursera.org/rice" target="_blank" data-if-linkable="add-referrer" title="https://www.coursera.org/rice" class="coursera-university-color"><img src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/university_logo" alt="rice"></a></div><h1 class="course-topbanner-header"><a href="https://class.coursera.org/principlescomputing-001/" data-if-linkable="modal-lock" class="course-topbanner-name coursera-university-color">Principles of Computing</a><br><span style="" class="course-topbanner-instructor">by Scott Rixner, Joe Warren, Luay Nakhleh</span></h1></div></div></div><div style="position:relative;" class="container-fluid"><div class="row-fluid"><div id="course-page-sidebar" role="navigation"><div role="menubar" class="coursera-sidebar"><div id="course-page-sidebar" role="navigation"><div class="course-navbar-container"><a href="https://class.coursera.org/principlescomputing-001" data-ab-user-convert-for="honorcode_to_welcome2" data-ab-user-convert="navclick_index"><img src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/logo" style="width: 205px;height: 116px;margin: -15px 0px 8px 1px; box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);" alt="Course Home Page"></a><div data-coursera-course-search-nav-widget="data-coursera-course-search-nav-widget" class="input-append course-search-nav-box"><form method="get" action="https://class.coursera.org/principlescomputing-001/class/search" data-js-search-form="data-js-search-form" class="form-inline minimized-search"><label for="course-search-nav-input" class="accessible-text-for-reader">Search this course</label><input id="course-search-nav-input" type="text" name="q" data-js-search-input="data-js-search-input">&nbsp;<button type="submit" data-ab-user-convert-for="honorcode_to_welcome2" data-ab-user-convert="search" class="btn icon-search"><span class="accessible-text-for-reader">Search</span></button></form></div><h2 class="hidden">Side Navigation Bar</h2><ul class="course-navbar-list"><li class="course-navbar-item"><a href="https://class.coursera.org/principlescomputing-001/class/index" data-if-linkable="modal-lock,gray,lock-icon" data-ab-user-convert-for="honorcode_to_welcome2" data-ab-user-convert="navclick_Home" class="coursera-university-color"><span>Home </span><span></span></a></li><li class="course-navbar-item"><a href="https://class.coursera.org/principlescomputing-001/quiz/index?quiz_type=survey" data-if-linkable="modal-lock,gray,lock-icon" data-ab-user-convert-for="honorcode_to_welcome2" data-ab-user-convert="navclick_Surveys" class="coursera-university-color"><span>Surveys </span><span></span></a></li><li class="course-navbar-item"><h3>Class</h3></li><li class="course-navbar-item"><a href="https://class.coursera.org/principlescomputing-001/lecture/index" data-if-linkable="modal-lock,gray,lock-icon" data-ab-user-convert-for="honorcode_to_welcome2" data-ab-user-convert="navclick_Video_Lectures" class="coursera-university-color"><span>Video Lectures </span><span></span></a></li><li class="course-navbar-item"><a href="https://class.coursera.org/principlescomputing-001/quiz/index?quiz_type=homework" data-if-linkable="modal-lock,gray,lock-icon" data-ab-user-convert-for="honorcode_to_welcome2" data-ab-user-convert="navclick_Homework" class="coursera-university-color"><span>Homework </span><span></span></a></li><li class="course-navbar-item"><a href="https://class.coursera.org/principlescomputing-001/assignment/index" data-if-linkable="modal-lock,gray,lock-icon" data-ab-user-convert-for="honorcode_to_welcome2" data-ab-user-convert="navclick_Mini-projects" class="coursera-university-color"><span>Mini-projects </span><span></span></a></li><li class="course-navbar-item"><h3>Tools</h3></li><li class="course-navbar-item"><a href="http://www.codeskulptor.org/" target="_blank" data-if-linkable="modal-lock,gray,lock-icon" data-ab-user-convert-for="honorcode_to_welcome2" data-ab-user-convert="navclick_CodeSkulptor" class="coursera-university-color"><span>CodeSkulptor </span><span class="icon-share"></span><span class="accessible-text-for-reader">opens in new browser tab</span></a></li><li class="course-navbar-item"><h3>Practice and Help</h3></li><li class="course-navbar-item"><a href="https://class.coursera.org/principlescomputing-001/forum/index" data-if-linkable="modal-lock,gray,lock-icon" data-ab-user-convert-for="honorcode_to_welcome2" data-ab-user-convert="navclick_Discussion_Forums" class="coursera-university-color"><span>Discussion Forums </span><span></span></a></li><li class="course-navbar-item"><a href="https://class.coursera.org/principlescomputing-001/wiki/practice_activities" data-if-linkable="modal-lock,gray,lock-icon" data-ab-user-convert-for="honorcode_to_welcome2" data-ab-user-convert="navclick_Practice_Activities" class="coursera-university-color"><span>Practice Activities </span><span></span></a></li><li class="course-navbar-item"><a href="https://class.coursera.org/principlescomputing-001/wiki/helpful_pages" data-if-linkable="modal-lock,gray,lock-icon" data-ab-user-convert-for="honorcode_to_welcome2" data-ab-user-convert="navclick_Coding_Notes" class="coursera-university-color"><span>Coding Notes </span><span></span></a></li><li class="course-navbar-item"><a href="https://class.coursera.org/principlescomputing-001/wiki/video_notes" data-if-linkable="modal-lock,gray,lock-icon" data-ab-user-convert-for="honorcode_to_welcome2" data-ab-user-convert="navclick_Math_Notes" class="coursera-university-color"><span>Math Notes </span><span></span></a></li><li class="course-navbar-item"><h3>Administrivia</h3></li><li class="course-navbar-item"><a href="https://class.coursera.org/principlescomputing-001/wiki/honor_code" data-if-linkable="modal-lock,gray,lock-icon" data-ab-user-convert-for="honorcode_to_welcome2" data-ab-user-convert="navclick_Honor_Code_(Please_read!)" class="coursera-university-color"><span>Honor Code (Please read!) </span><span></span></a></li><li class="course-navbar-item"><a href="https://class.coursera.org/principlescomputing-001/wiki/faq" data-if-linkable="modal-lock,gray,lock-icon" data-ab-user-convert-for="honorcode_to_welcome2" data-ab-user-convert="navclick_FAQ" class="coursera-university-color"><span>FAQ </span><span></span></a></li><li class="course-navbar-item"><a href="https://class.coursera.org/principlescomputing-001/wiki/Syllabus" data-if-linkable="modal-lock,gray,lock-icon" data-ab-user-convert-for="honorcode_to_welcome2" data-ab-user-convert="navclick_Syllabus" class="coursera-university-color"><span>Syllabus </span><span></span></a></li><li class="course-navbar-item"><a href="https://class.coursera.org/principlescomputing-001/wiki/course_staff" data-if-linkable="modal-lock,gray,lock-icon" data-ab-user-convert-for="honorcode_to_welcome2" data-ab-user-convert="navclick_Course_Staff" class="coursera-university-color"><span>Course Staff </span><span></span></a></li></ul><ul style="list-style-type:none;margin-left: 10px;"><li><a href="http://help.coursera.org/" target="_blank" title="Open help articles in new window" class="coursera-university-color"><i class="icon-question-sign"></i>Help Articles</a></li></ul><ul style="list-style-type:none;margin-left: 10px;"></ul></div></div></div></div><div id="course-page-content" role="main"><div id="spark" class="hide" style="display: block;">
+<h2 class="course-page-header">
+    Analyzing a Simple Dice Game    <a class="coursera-reporter-link" title="Click here if you&#39;re experiencing technical problems or found errors in the course materials." target="_blank" href="https://class.coursera.org/principlescomputing-001/help/pages?url=https%3A%2F%2Fclass.coursera.org%2Fprinciplescomputing-001%2Fwiki%2Fdice_game">
+      Help
+    </a>
+    <a data-coursera-admin-helpwidget-link="" rel="help" href="https://class.coursera.org/mooc/help/pages/setup" title="Course Page Setup" style="display:none;">Learn more.</a>
+</h2>
+
+
+<h4> Overview</h4>
+This week's mini-project will be to build a program that determines which dice to discard when trying to maximize your score on a Yahtzee hand.  To help illustrate several of the concepts that you will use in the mini-project, we will consider a simpler dice game as follows:
+<p></p>
+<p>
+Walking on a busy street, you happen upon a stranger sitting at a small folding table and holding three dice.  He is pitching the following game to the surrounding crowd: give him $10 and he will let you roll the dice. If you roll doubles (two of the dice are paired), he will return your $10. If you roll triples (all three dice have the same value), he will give you $200.  However, if you roll neither (the dice are unpaired), he keeps your $10.  Although the lure of $200 is tempting, you are wise and move on.  Later that evening your curiosity gets the best of you and you decide to use your math/Python skills to analyze the game and determine whether the game (if it is legitimate) is in your favor.  
+</p>
+<p></p>
+<p>
+Our task in analyzing this game is to compute the expected value of a single round of the game.  To compute this value, we need to determine how likely rolling doubles and triples are using three dice.  After paying our initial $10, our expected return will be the probability of rolling doubles times $10 plus the probability of rolling triples times $200.  If the resulting expected return is greater than $10, you should have played (as long as you had a bodyguard).  Your task for this activity is to build a short Python program that computes this quantity.
+</p>
+<h4>Generating rolls</h4>
+Our first decision is how to create the set of all rolls of three dice.  We already have some code that is available to us <a href="http://www.codeskulptor.org/#poc_enumeration.py">here</a>.  This program provides us with two possible functions for generating dice rolls.  Which function should we use?  <code>gen_all_sequences</code> or <code>gen_sorted_sequences</code>?   Your first task is to decide on which function you should use and why. Stop and think about this question for a moment.
+<p></p>
+<p></p>
+<p>
+We recommend that you use <code>gen_all_sequences</code> since the probability for each sequence is easy to compute: <span class="MathJax_Preview"></span><span class="MathJax" id="MathJax-Element-1-Frame" role="textbox" aria-readonly="true"><nobr><span class="math" id="MathJax-Span-1"><span style="display: inline-block; position: relative; width: 116px; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(23.3px 16240px 50.8px -7.1px); top: -41px; left: 0px;"><span class="mrow" id="MathJax-Span-2"><span class="mfrac" id="MathJax-Span-3" style="padding-left: 1.9px; padding-right: 1.9px;"><span style="display: inline-block; position: relative; width: 7.9px; height: 0px;"><span style="position: absolute; clip: rect(26.2px 16240px 40px -7.7px); top: -43.9px; left: 50%; margin-left: -3px;"><span class="mn" id="MathJax-Span-4" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">1</span><span style="display: inline-block; width: 0px; height: 37px;"></span></span><span style="position: absolute; clip: rect(26.1px 16240px 40.2px -8.6px); top: -30.4px; left: 50%; margin-left: -3px;"><span class="mn" id="MathJax-Span-5" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">6</span><span style="display: inline-block; width: 0px; height: 37px;"></span></span><span style="position: absolute; clip: rect(12.8px 16240px 20px -9px); top: -20.6px; left: 0px;"><span style="border-left-width: 7.9px; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.25px; vertical-align: 0px;"></span><span style="display: inline-block; width: 0px; height: 17px;"></span></span></span></span><span class="mo" id="MathJax-Span-6" style="font-family: STIXGeneral-Regular; padding-left: 4.1px;">×</span><span class="mfrac" id="MathJax-Span-7" style="padding-left: 6px; padding-right: 1.9px;"><span style="display: inline-block; position: relative; width: 7.9px; height: 0px;"><span style="position: absolute; clip: rect(26.2px 16240px 40px -7.7px); top: -43.9px; left: 50%; margin-left: -3px;"><span class="mn" id="MathJax-Span-8" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">1</span><span style="display: inline-block; width: 0px; height: 37px;"></span></span><span style="position: absolute; clip: rect(26.1px 16240px 40.2px -8.6px); top: -30.4px; left: 50%; margin-left: -3px;"><span class="mn" id="MathJax-Span-9" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">6</span><span style="display: inline-block; width: 0px; height: 37px;"></span></span><span style="position: absolute; clip: rect(12.8px 16240px 20px -9px); top: -20.6px; left: 0px;"><span style="border-left-width: 7.9px; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.25px; vertical-align: 0px;"></span><span style="display: inline-block; width: 0px; height: 17px;"></span></span></span></span><span class="mo" id="MathJax-Span-10" style="font-family: STIXGeneral-Regular; padding-left: 4.1px;">×</span><span class="mfrac" id="MathJax-Span-11" style="padding-left: 6px; padding-right: 1.9px;"><span style="display: inline-block; position: relative; width: 7.9px; height: 0px;"><span style="position: absolute; clip: rect(26.2px 16240px 40px -7.7px); top: -43.9px; left: 50%; margin-left: -3px;"><span class="mn" id="MathJax-Span-12" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">1</span><span style="display: inline-block; width: 0px; height: 37px;"></span></span><span style="position: absolute; clip: rect(26.1px 16240px 40.2px -8.6px); top: -30.4px; left: 50%; margin-left: -3px;"><span class="mn" id="MathJax-Span-13" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">6</span><span style="display: inline-block; width: 0px; height: 37px;"></span></span><span style="position: absolute; clip: rect(12.8px 16240px 20px -9px); top: -20.6px; left: 0px;"><span style="border-left-width: 7.9px; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.25px; vertical-align: 0px;"></span><span style="display: inline-block; width: 0px; height: 17px;"></span></span></span></span><span class="mo" id="MathJax-Span-14" style="font-family: STIXGeneral-Regular; padding-left: 5.1px;">=</span><span class="mfrac" id="MathJax-Span-15" style="padding-left: 7px; padding-right: 1.9px;"><span style="display: inline-block; position: relative; width: 20.9px; height: 0px;"><span style="position: absolute; clip: rect(26.2px 16240px 40px -7.7px); top: -43.9px; left: 50%; margin-left: -3px;"><span class="mn" id="MathJax-Span-16" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">1</span><span style="display: inline-block; width: 0px; height: 37px;"></span></span><span style="position: absolute; clip: rect(26.1px 16240px 40.2px -8.7px); top: -30.4px; left: 50%; margin-left: -9.5px;"><span class="mn" id="MathJax-Span-17" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">216</span><span style="display: inline-block; width: 0px; height: 37px;"></span></span><span style="position: absolute; clip: rect(12.8px 16240px 20px -9px); top: -20.6px; left: 0px;"><span style="border-left-width: 20.9px; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.25px; vertical-align: 0px;"></span><span style="display: inline-block; width: 0px; height: 17px;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 41px;"></span></span></span><span style="border-left-width: 0px; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 23.5px; vertical-align: -7.8px;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-1">\frac{1}{6} \times \frac{1}{6} \times \frac{1}{6} = \frac{1}{216}</script>.  Using <code>gen_sorted_sequences</code> would require some math to account for all of the sequences that correspond to one sorted sequence.  With that decision behind us, here is a <a href="http://www.codeskulptor.org/#poc_dice_game_template.py">short template</a> that you can build on.
+</p>
+<h4> Detecting doubles and triples </h4>
+Using <code>gen_all_sequences</code>, we can now generate all possible <span class="MathJax_Preview"></span><span class="MathJax" id="MathJax-Element-2-Frame" role="textbox" aria-readonly="true"><nobr><span class="math" id="MathJax-Span-18"><span style="display: inline-block; position: relative; width: 60px; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(23.6px 16240px 44.2px -8.4px); top: -41px; left: 0px;"><span class="mrow" id="MathJax-Span-19"><span class="msubsup" id="MathJax-Span-20"><span style="display: inline-block; position: relative; width: 15.2px; height: 0px;"><span style="position: absolute; clip: rect(26.9px 16240px 44.2px -8.4px); top: -41px; left: 0px;"><span class="mn" id="MathJax-Span-21" style="font-family: STIXGeneral-Regular;">6</span><span style="display: inline-block; width: 0px; height: 41px;"></span></span><span style="position: absolute; top: -43.7px; left: 8px;"><span class="mn" id="MathJax-Span-22" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">3</span><span style="display: inline-block; width: 0px; height: 37px;"></span></span></span></span><span class="mo" id="MathJax-Span-23" style="font-family: STIXGeneral-Regular; padding-left: 5.1px;">=</span><span class="mn" id="MathJax-Span-24" style="font-family: STIXGeneral-Regular; padding-left: 5.1px;">216</span></span><span style="display: inline-block; width: 0px; height: 41px;"></span></span></span><span style="border-left-width: 0px; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 16.7px; vertical-align: -1.2px;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-2">6^3 = 216</script> sequences of three die values.   To compute the expected value for one round of the game, we need to detect whether a sequence corresponds to doubles or triples.  Since this task can be easily isolated from the computation of the expected value, we will next implement a helper function <code>max_repeats(seq)</code> that takes a sequence and computes the maximum number of times that any individual item occurs in the sequence.
+<p></p>
+<p>
+Before you rush off to implement this helper function, I suggest that you spend a few seconds and consider how to implement the function.  In particular, you might take a look at the list methods in the Docs and see if there are any built-in Python methods that can help simplify this task.  As a hint, <a href="http://www.codeskulptor.org/#poc_dice_game_v1.py">our implementation</a> of <code>max_repeats</code> consists of two lines of Python code (using a list comprehension).  If you are writing more, think more and code less.
+</p>
+<h4> Computing the expected value </h4>
+With the helper function <code>max_repeats</code> built, our last task is to implement a function <code>compute_expected_value</code>.  This function should return the expected value excluding the initial $10 that you paid.  If the computed expected value from your roll is greater than $10, you should play the game as much as possible.  To aid in debugging your code, the value returned by <code>compute_expected_value()</code> should lie in the range of $9 to $11.  This result makes the decision of whether or not to play the game a close one. Please implement <code>compute_expected_value</code> now.
+<p></p>
+<p>
+Once you have implemented your version of <code>compute_expected_value</code>, you are welcome to consult <a href="http://www.codeskulptor.org/#poc_dice_game_solution.py">our solution</a>.   <code>compute_expected_value()</code> returns approximately $9.72 which is consistent with the game being slightly unfavorable. So, resist the urge to play and learn how to count cards in Blackjack instead.</p>
+<hr>
+<div>
+    <div style="float:left">
+    	    	    </div>
+    <div style="float:right;text-align:right;font-size:10px;">
+    	Created Wed  4 Jun 2014  4:18 PM MDT<br>
+    	Last Modified Thu  3 Jul 2014  4:51 PM MDT    </div>
+</div>
+<script type="text/x-mathjax-config;executed=true">
+MathJax.Hub.Config({
+  config: ["MMLorHTML.js"],
+  
+  styleSheets: [],
+  styles: {},
+
+  jax: ["input/TeX"],
+  
+  extensions: ["tex2jax.js"],
+
+  preJax: null,
+  postJax: null,
+
+  preRemoveClass: "MathJax_Preview",
+
+  showProcessingMessages: true,
+
+  messageStyle: "none",
+  
+  displayAlign: "center",
+  displayIndent: "0em",
+  
+  delayStartupUntil: "none",
+
+  skipStartupTypeset: false,
+  
+  elements: [],
+  
+  tex2jax: {
+	    inlineMath: [
+	                 ['$$','$$'],      // uncomment this for standard TeX math delimiters
+	                 ['\\(','\\)']
+	                 ],
+
+	                 displayMath: [
+	                 ['\\[','\\]']
+	                 ],
+
+    skipTags: ["script","noscript","style","textarea","pre","code"],
+    ignoreClass: "tex2jax_ignore",
+    processClass: "tex2jax_process",
+    processEscapes: false,
+    processEnvironments: true,
+    preview: "TeX"
+    
+  },
+  
+  mml2jax: {
+    preview: "alttext"
+    
+  },
+  
+  jsMath2jax: {
+    preview: "TeX"
+    
+  },
+
+  TeX: {
+    TagSide: "right",
+    TagIndent: ".8em",
+    MultLineWidth: "85%",
+    Macros: {},
+
+    extensions: ["AMSmath.js", "AMSsymbols.js"]
+    
+  },
+
+  //============================================================================
+  //
+  //  These parameters control the MathML inupt jax.
+  //
+  MathML: {
+    //
+    //  This specifies whether to use TeX spacing or MathML spacing when the
+    //  HTML-CSS output jax is used.
+    //
+    useMathMLspacing: false
+  },
+  
+  //============================================================================
+  //
+  //  These parameters control the HTML-CSS output jax.
+  //
+  "HTML-CSS": {
+    
+    scale: 100,
+    
+    availableFonts: ["STIX","TeX"],
+    
+    preferredFont: "TeX",
+    
+    webFont: "TeX",
+    
+    imageFont: "TeX",
+    
+    undefinedFamily: "STIXGeneral,'Arial Unicode MS',serif",
+      
+    showMathMenu: true,
+
+    styles: {},
+    
+    tooltip: {
+      delayPost: 600,          // milliseconds delay before tooltip is posted after mouseover
+      delayClear: 600,         // milliseconds delay before tooltip is cleared after mouseout
+      offsetX: 10, offsetY: 5  // pixels to offset tooltip from mouse position
+    }
+  },
+  
+  //============================================================================
+  //
+  //  These parameters control the NativeMML output jax.
+  //
+  NativeMML: {
+
+    scale: 100,
+
+    showMathMenu: true,
+    showMathMenuMSIE: true,
+
+    styles: {}
+  },
+  
+  MathMenu: {
+    delay: 400,
+    
+    helpURL: "http://www.mathjax.org/help/user/",
+
+    showRenderer: true,
+    showFontMenu: false,
+    showContext:  false,
+
+    windowSettings: {
+      status: "no", toolbar: "no", locationbar: "no", menubar: "no",
+      directories: "no", personalbar: "no", resizable: "yes", scrollbars: "yes",
+      width: 100, height: 50
+    },
+    
+    styles: {}
+    
+  },
+
+  MMLorHTML: {
+    prefer: {
+      MSIE:    "MML",
+      Firefox: "HTML",
+      Opera:   "HTML",
+      other:   "HTML"
+    }
+  }
+});
+</script>
+</div></div></div></div></div><div class="coursera-footer"></div></div></div></div><!--[if gte IE 8]><script>document.getElementById("coursera-loading-js").style.display = 'block';</script><![endif]-->
+<!--[if lte IE 7]><script>document.getElementById("coursera-loading-nojs").style.display = 'block';
+window._204 = window._204 || [];
+window._gaq = window._gaq || [];
+
+window._gaq.push(
+    ['_setAccount', 'UA-28377374-1'],
+    ['_setDomainName', window.location.hostname],
+    ['_setAllowLinker', true],
+    ['_trackPageview', window.location.pathname]);
+    
+window._204.push(
+  ['client', 'home'],
+  {key:"pageview", value:window.location.pathname});
+  </script><script src="https://eventing.coursera.org/204.min.js"></script><script src="https://ssl.google-analytics.com/ga.js"></script><![endif]-->
+<!--[if !IE]> --><script>document.getElementById("coursera-loading-js").style.display = 'block';</script><!-- <![endif]-->
+    <script src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/jquery.js"></script>
+      <script src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/loadOrRefreshMathJax.js"></script>
+      <script src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/textbook_wiki.js"></script>
+  <script src="./Wiki - Analyzing a Simple Dice Game   Coursera_files/require.js"></script><script data-baseurl="https://d2wvvaown1ul17.cloudfront.net/site-static/83a26a591b2e7e34d3ed6acc38fabb58d591faeb/" data-version="83a26a591b2e7e34d3ed6acc38fabb58d591faeb" data-timestamp="1404427906671" data-debug="0" data-locale="en_US" id="_require">if(document.getElementById("coursera-loading-js").style.display == 'block') {
+  (function(el) {
+     require.config({
+       //enforceDefine: true,
+       waitSeconds: 75,
+       baseUrl: el.getAttribute("data-baseurl"),
+       urlArgs: el.getAttribute("data-debug") == "1" ? "v=" + el.getAttribute("data-timestamp") : "",
+       shim: {
+          'underscore': {
+             exports: '_'
+          },
+          'backbone': {
+             deps: ['underscore', 'jquery'],
+             exports: 'Backbone',
+             init: function(_, $) {
+               Backbone.$ = $;
+               return Backbone;
+             }
+          },
+          'pages/hg/thirdparty/js/backbone.marionette': {
+            deps: ["backbone"]
+          },
+          'pages/hg/thirdparty/js/webshims/polyfiller': {
+            deps: ["jquery"]
+          },
+          'pages/hg/thirdparty/js/webshims/extras/mousepress': {
+            deps: ["jquery", "pages/hg/thirdparty/js/webshims/polyfiller"]
+          },
+          'pages/hg/thirdparty/js/jquery.throttle': {
+            deps: ["jquery"]
+          },
+          'js/lib/jquery.linkify': {
+            deps: ["jquery"]
+          },
+          'pages/hg/thirdparty/js/js/bootstrap/alert': {
+            deps: ["jquery", "pages/hg/thirdparty/js/bootstrap/transition"]
+          },
+          'spark/core/js/jquery_ui': {
+            deps: ["jquery"]
+          },
+          'spark/core/js/jquery.history': {
+            deps: ["jquery"]
+          },
+          'js/lib/bootstrap.tooltip': {
+            deps: ["jquery"]
+          },
+          'pages/hg/thirdparty/js/bootstrap/transition': {
+            deps: ["jquery"]
+          },
+          'pages/hg/thirdparty/js/bootstrap/tab': {
+            deps: ["jquery"]
+          },
+          'bundles/videojs/lib/video.4.3.0': {
+            exports: 'vjs'
+          }
+       },
+       paths: {
+          "jquery":                         "pages/spark/jquery",
+          "underscore":                     "js/core/underscore.1.5.2",
+          "backbone":                       "js/core/backbone.1.1.0",
+          "backbone.relational":            "js/lib/backbone.relational.0.8.6",
+          "i18n":                           "js/core/i18n._t",
+          "css": 'js/vendor/require.css.v0-1-2',
+          "pages/spark/models/user.json":   "empty:",
+          "pages/spark/models/course.json": "empty:",
+          "pages/spark/models/navbar.json": "empty:"
+       },
+       callback: function() {
+                    require(["pages/spark/routes"]);
+                },
+       config: {
+         i18n: {
+           locale: (window.localStorage ? localStorage.getItem('locale') : '') || el.getAttribute('data-locale')
+         }
+       }
+     });
+  })(document.getElementById("_require"));
+}
+</script><script>define("pages/spark/models/user.json", [], function(){
+      return JSON.parse("{\"id\":39836,\"email_address\":\"muntasir2165@hotmail.com\",\"full_name\":\"Mohammad Muntasir Biojid Sirajee\",\"locale\":\"en_US\",\"timezone\":\"America\\\/Edmonton\",\"access_group_id\":\"4\",\"registration_time\":\"1390342238\",\"last_access_time\":\"1404352369\",\"last_access_ip\":\"137.186.245.199\",\"signature_track_register_time\":\"0\",\"email_announcement\":\"1\",\"email_forum\":\"1\",\"in_signature_track\":\"0\",\"wishes_proctored_exam\":null,\"first_name\":\"Mohammad\",\"permissions\":[\"default\",\"allow_site_access\"],\"group\":\"Student\",\"anonymous\":false,\"forum_title\":\"Student\",\"signature_track_state\":1,\"verified_quizzes\":[],\"submitted_quizzes\":[\"23\",\"27\",\"29\",\"31\"],\"scheduled_proctored_exam\":null,\"last_chance_modal\":1}");
+  });
+define("pages/spark/models/course.json", [], function(){
+      return JSON.parse("{\"id\":972069,\"isPrivate\":false,\"type\":\"public\",\"name\":\"Principles of Computing\",\"instructor\":\"Scott Rixner, Joe Warren, Luay Nakhleh\",\"sessionName\":\"principlescomputing-001\",\"externalBaseURL\":\"https:\\\/\\\/www.coursera.org\\\/\",\"shortname\":\"principlescomputing\",\"host\":\"https:\\\/\\\/www.coursera.org\\\/\",\"assetUnversionedLink\":\"https:\\\/\\\/dt5zaw6a98blc.cloudfront.net\\\/site-static\\\/\",\"cheggID\":\"\",\"hasLTI\":true,\"badgevilleDomain\":\"\",\"linkable\":false,\"universityShortname\":\"rice\",\"signatureTrackStatus\":{\"signature_track_enabled\":1},\"courseURLs\":{\"log_in_link\":\"https:\\\/\\\/accounts.coursera.org\\\/signin?post_redirect=https%3A%2F%2Faccounts.coursera.org%2Fsignin%3Fuser_action%3Dclass%26course_id%3D972069%26post_redirect%3Dhttps%253A%252F%252Fclass.coursera.org%252Fprinciplescomputing-001%252Fauth%252Fauth_redirector%253Ftype%253Dlogin%2526subtype%253Dnormal%2526visiting%253D\",\"sign_up_link\":\"https:\\\/\\\/accounts.coursera.org\\\/signup?enroll_cid=972069&enroll_sn=principlescomputing&enroll_n=Principles of Computing\",\"view_course_info_link\":\"https:\\\/\\\/www.coursera.org\\\/course\\\/principlescomputing\",\"sign_up_link_cant_enroll\":\"https:\\\/\\\/accounts.coursera.org\\\/signup?post_redirect=https%3A%2F%2Fwww.coursera.org%2Fcourse%2Fprinciplescomputing\"},\"courseBase\":\"https:\\\/\\\/class.coursera.org\\\/principlescomputing-001\\\/\",\"search\":true,\"hideWiki\":true,\"hideMeetup\":true,\"aceStartRegistrationDate\":\"Wed 31 Dec 1969  5:00 PM MST\",\"aceEndRegistrationDate\":\"Wed 31 Dec 1969  5:00 PM MST\",\"aceExamStartDate\":\"Wed 31 Dec 1969  5:00 PM MST\",\"aceExamEndDate\":\"Wed 31 Dec 1969  5:00 PM MST\",\"aceExamRules\":\"\",\"aceExamDuration\":\"\",\"aceBeforeExam\":false,\"aceAfterExam\":true,\"aceHours\":null,\"aceCreditType\":\"\",\"acePrice\":null,\"aceExamID\":null,\"aceEligible\":false,\"canRegisterForACE\":false,\"specialization\":{\"numCourse\":3,\"image\":\"https:\\\/\\\/s3.amazonaws.com\\\/coursera\\\/specializations\\\/fundamentalscomputing\\\/logo_small.jpg\",\"id\":9,\"short_name\":\"fundamentalscomputing\",\"name\":\"Fundamentals of Computing\"},\"supportForums\":false,\"textbooks\":\"\",\"inVideoQuizV2\":true,\"in_flexjoin\":\"\",\"honorCodeExtraText\":\"\",\"honorCodeCustomTitle\":\"\",\"honorCodeCustomButton\":\"\"}");
+  });
+  define("pages/spark/models/navbar.json", [], function(){
+      return JSON.parse("{\"items\":[{\"name\":\"Home\",\"icon\":\"\",\"link_type\":\"circuit\",\"link_data\":\"class:index\"},{\"name\":\"Surveys\",\"icon\":\"\",\"link_type\":\"circuit\",\"link_data\":\"quiz:index?quiz_type=survey\"},{\"name\":\"Class\",\"icon\":\"\",\"link_type\":\"heading\",\"link_data\":\"\"},{\"name\":\"Video Lectures\",\"icon\":\"home\",\"link_type\":\"circuit\",\"link_data\":\"lecture:index\"},{\"name\":\"Homework\",\"icon\":\"lecture\",\"link_type\":\"circuit\",\"link_data\":\"quiz:index?quiz_type=homework\"},{\"name\":\"Mini-projects\",\"icon\":\"assignment\",\"link_type\":\"circuit\",\"link_data\":\"assignment:index\"},{\"name\":\"Tools\",\"icon\":\"\",\"link_type\":\"heading\",\"link_data\":\"\"},{\"name\":\"CodeSkulptor\",\"icon\":\"\",\"link_type\":\"window_link\",\"link_data\":\"http:\\\/\\\/www.codeskulptor.org\"},{\"name\":\"Practice and Help\",\"icon\":\"\",\"link_type\":\"heading\",\"link_data\":\"\"},{\"name\":\"Discussion Forums\",\"icon\":\"forum\",\"link_type\":\"circuit\",\"link_data\":\"forum:index\"},{\"name\":\"Practice Activities\",\"icon\":\"\",\"link_type\":\"wiki\",\"link_data\":\"practice_activities\"},{\"name\":\"Coding Notes\",\"icon\":\"\",\"link_type\":\"wiki\",\"link_data\":\"helpful_pages\"},{\"name\":\"Math Notes\",\"icon\":\"\",\"link_type\":\"wiki\",\"link_data\":\"video_notes\"},{\"name\":\"Administrivia\",\"icon\":\"\",\"link_type\":\"heading\",\"link_data\":\"\"},{\"name\":\"Honor Code (Please read!)\",\"icon\":\"\",\"link_type\":\"wiki\",\"link_data\":\"honor_code\"},{\"name\":\"FAQ\",\"icon\":\"\",\"link_type\":\"wiki\",\"link_data\":\"faq\"},{\"name\":\"Syllabus\",\"icon\":\"wiki\",\"link_type\":\"wiki\",\"link_data\":\"Syllabus\"},{\"name\":\"Course Staff\",\"icon\":\"\",\"link_type\":\"wiki\",\"link_data\":\"course_staff\"}]}");
+  });
+</script><div class="hide confirm-navigation modal"><div class="modal-header"><h3>Confirm Navigation</h3></div><div class="modal-body"><div class="confirm-navigation-message"></div><div>Are you sure you want to leave this page?</div></div><div class="modal-footer"><button data-modal-close="data-modal-close" class="btn confirm-navigation-stay">Stay on this Page</button><button data-modal-close="data-modal-close" class="btn btn-danger confirm-navigation-leave">Leave this Page</button></div></div><div class="coursera-async-message" style="display: none;"></div><div id="MathJax_Font_Test" style="position: absolute; visibility: hidden; top: 0px; left: 0px; width: auto; padding: 0px; border: 0px; margin: 0px; white-space: nowrap; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; font-size: 40px; font-weight: normal; font-style: normal; font-family: STIXSizeOneSym, sans-serif;">ˆ</div></body></html>
